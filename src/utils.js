@@ -1,4 +1,4 @@
-export function calculateLemonadePrice(lemonade) {
+function calculateLemonadePrice(lemonade) {
   let result = 0.75
   for (let key in lemonade) {
     switch (key) {
@@ -21,9 +21,11 @@ export function calculateLemonadePrice(lemonade) {
   return result
 }
 
-export function calculateOrderTotal({ lemonades }) {
+function calculateOrderTotal({ lemonades }) {
   let result = 0
   for (let lemonade of lemonades) {
-    result += calculateLemonadePrice(lemonade)
+    result += lemonade.price
   }
 }
+
+export { calculateLemonadePrice, calculateOrderTotal }

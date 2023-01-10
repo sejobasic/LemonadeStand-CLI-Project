@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 function calculateLemonadePrice(lemonade) {
   let result = 0.75
   for (let key in lemonade) {
@@ -28,4 +30,8 @@ function calculateOrderTotal({ lemonades }) {
   }
 }
 
-export { calculateLemonadePrice, calculateOrderTotal }
+function writeFileSync(fileName, order) {
+  fs.writeFileSync(fileName, JSON.stringify(order))
+}
+
+export { calculateLemonadePrice, calculateOrderTotal, writeFileSync }

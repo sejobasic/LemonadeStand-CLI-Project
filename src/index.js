@@ -42,7 +42,7 @@
 // }
 
 import Vorpal from 'vorpal'
-import { calculateLemonadePrice, calculateOrderTotal } from './utils'
+import { calculateLemonadePrice, calculateOrderTotal, writeFileSync } from './utils'
 
 const vorpal = Vorpal()
 
@@ -76,10 +76,11 @@ vorpal
       {
         type: 'number',
         name: 'numLemonades',
+        default: 1,
         message: 'How many lemonades would you like to order?',
       },
-      (userResp) => {
-        const userNum = Number.parseInt(userResp.numLemonades)
+      ({numLemonades}) => {
+        const userNum = Number.parseInt(numLemonades)
         const questions = []
 
         for (let i = 1; i <= userNum; i++) {
@@ -120,7 +121,10 @@ vorpal
             }
 
             // Set the total price of the order
-            order.price = calculateOrderTotal(order)
+            order.total = calculateOrderTotal(order)
+
+            writeFileSync(order.lemonadeStand.name + '/' + order.customer.name + '.json', order)
+            callback()
           })
         }
       }

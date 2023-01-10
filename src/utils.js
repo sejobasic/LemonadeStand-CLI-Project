@@ -28,10 +28,56 @@ function calculateOrderTotal({ lemonades }) {
   for (let lemonade of lemonades) {
     result += lemonade.price
   }
+  return result;
+}
+
+function addQuestions(numLemonades) {
+  const userNum = Number.parseInt(numLemonades)
+  const questions = []
+
+  for (let i = 1; i <= userNum; i++) {
+    questions.push({
+      type: 'number',
+      name: 'lemonJuice' + i,
+      message: `How many cups of lemon juice do you want in your lemonade ${i}?"`,
+    })
+    questions.push({
+      type: 'number',
+      name: 'water' + i,
+      message: `How many cups of water do you want in your lemonade ${i}?"`,
+    })
+    questions.push({
+      type: 'number',
+      name: 'sugar' + i,
+      message: `How many cups of sugar do you want in your lemonade ${i}?"`,
+    })
+    questions.push({
+      type: 'number',
+      name: 'iceCubes' + i,
+      message: `How many ice cubes do you want in your lemonade ${i}?"`,
+    })
+  }
+
+  return questions
 }
 
 function writeFileSync(fileName, order) {
   fs.writeFileSync(fileName, JSON.stringify(order))
 }
 
-export { calculateLemonadePrice, calculateOrderTotal, writeFileSync }
+function readAllFiles(dirName) {
+  const orders = []
+
+  for (let name of fs.readdirSync(dirName)) {
+    orders.push(JSON.parse(fs.readFileSync(dirName + '/' + name)))
+  }
+  return orders
+}
+
+export {
+  calculateLemonadePrice,
+  calculateOrderTotal,
+  addQuestions,
+  writeFileSync,
+  readAllFiles,
+}

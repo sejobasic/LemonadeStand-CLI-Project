@@ -1,12 +1,15 @@
 {
+  "total": 7.270000000000001,
   "lemonades": [
     {
-      "lemonJuice": "3",
-      "water": "7",
-      "sugar": "3",
-      "iceCubes": "4",
-      "price": 2.5200000000000005
-    }
+      "lemonJuice": 2,
+      "water": 34,
+      "sugar": 4,
+      "iceCubes": 2,
+      "price": 2.5900000000000003
+    },
+    { "lemonJuice": 3, "water": 1, "sugar": 2, "iceCubes": 3, "price": 2.21 },
+    { "lemonJuice": 4, "water": 2, "sugar": 2, "iceCubes": 2, "price": 2.47 }
   ],
   "customer": { "name": "Sejo", "phoneNumber": 1234 },
   "lemonadeStand": { "name": "Sejos Lemonade Stand" }

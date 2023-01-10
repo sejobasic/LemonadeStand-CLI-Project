@@ -41,16 +41,15 @@
 //   },
 // }
 
-import Vorpal from "vorpal";
-import { calculateLemonadePrice, calculateOrderTotal } from "./utils";
+import Vorpal from 'vorpal'
+import { calculateLemonadePrice, calculateOrderTotal } from './utils'
 
 const vorpal = Vorpal()
 
 vorpal
-  .command('hello', 'Prints hello')
-  .action(function(args, callback) {
-    this.log(args)
-    this.log('Hello')
+  .command('hello <name>', 'Prints hello')
+  .action(function (args, callback) {
+    this.log(`Hello ${args.name}`)
     callback()
   })
 

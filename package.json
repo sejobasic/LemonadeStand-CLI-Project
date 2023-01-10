@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./src -d ./build",
     "prestart": "npm run build",
-    "start": "node ."
+    "start": "nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,9 @@
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
-    "@babel/preset-env": "^7.20.2"
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "nodemon": "^2.0.20"
   },
   "dependencies": {
     "vorpal": "^1.12.0"

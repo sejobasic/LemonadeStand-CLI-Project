@@ -28,7 +28,7 @@ function calculateOrderTotal({ lemonades }) {
   for (let lemonade of lemonades) {
     result += lemonade.price
   }
-  return result;
+  return result
 }
 
 function addQuestions(numLemonades) {
@@ -57,8 +57,20 @@ function addQuestions(numLemonades) {
       message: `How many ice cubes do you want in your lemonade ${i}?"`,
     })
   }
-
   return questions
+}
+
+function createLemonadeObjs(orgOrder, i) {({
+    ...orgOrder,
+    lemonades: [
+      ...orgOrder.lemonades,
+      {
+        lemonJuice: Number.parseInt(userResp['lemonJuice' + i]),
+        water: Number.parseInt(userResp['water' + i]),
+        sugar: Number.parseInt(userResp['sugar' + i]),
+        iceCubes: Number.parseInt(userResp['iceCubes' + i]),
+      },
+    ]})
 }
 
 function writeFileSync(fileName, order) {
@@ -78,6 +90,7 @@ export {
   calculateLemonadePrice,
   calculateOrderTotal,
   addQuestions,
+  createLemonadeObjs,
   writeFileSync,
   readAllFiles,
 }

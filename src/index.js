@@ -3,6 +3,7 @@ import {
   calculateLemonadePrice,
   calculateOrderTotal,
   addQuestions,
+  createLemonadeObjs,
   writeFileSync,
   readAllFiles,
 } from './utils'
@@ -39,12 +40,7 @@ vorpal
         this.prompt(addQuestions(numLemonades), (userResp) => {
           // Create a lemonade object for each lemonade in the order
           for (let i = 1; i <= numLemonades; i++) {
-            order.lemonades.push({
-              lemonJuice: Number.parseInt(userResp['lemonJuice' + i]),
-              water: Number.parseInt(userResp['water' + i]),
-              sugar: Number.parseInt(userResp['sugar' + i]),
-              iceCubes: Number.parseInt(userResp['iceCubes' + i]),
-            })
+            order = createLemonadeObjs(order, i)
           }
 
           // Set price of each lemonade in the order

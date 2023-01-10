@@ -60,6 +60,8 @@ vorpal
   )
   .action(function (args, callback) {
     const order = {
+      total: 0,
+      lemonades: [],
       customer: {
         name: args.name,
         phoneNumber: args.phoneNumber,
@@ -78,9 +80,8 @@ vorpal
       },
       (userResp) => {
         const userNum = Number.parseInt(userResp.numLemonades)
-        let lemonade = {}
-
         const questions = []
+
         for (let i = 1; i <= userNum; i++) {
           questions.push({
             type: 'number',
@@ -103,8 +104,23 @@ vorpal
             message: `How many ice cubes do you want in your lemonade ${i}?"`,
           })
           this.prompt(questions, (userResp) => {
-            this.log(userResp)
-            callback()
+            // Create a lemonade object for each lemonade in the order
+            for (let i = 1; i <= numLemonades; i++) {
+              order.lemonades.push({
+                lemonJuice: userResp['lemonJuice' + i],
+                water: userResp['water' + i],
+                sugar: userResp['sugar' + i],
+                iceCubes: userResp['iceCubes' + i],
+              })
+            }
+
+            // Set price of each lemonade in the order
+            for (let lemonade of order.lemonades) {
+              lemonade.price = calculateLemonadePrice(lemonade)
+            }
+
+            // Set the total price of the order
+            order.price = calculateOrderTotal(order)
           })
         }
       }

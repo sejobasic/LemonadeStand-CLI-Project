@@ -29,7 +29,7 @@ vorpal
     }
 
     // Prompt the user for how many lemonades they want
-    this.prompt(
+    this.prompt( 
       {
         type: 'number',
         name: 'numLemonades',

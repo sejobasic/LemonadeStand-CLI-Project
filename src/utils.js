@@ -31,6 +31,13 @@ function calculateOrderTotal({ lemonades }) {
   return result
 }
 
+function updateOrderTotal(order) {
+  return {
+    ...order,
+    total: calculateOrderTotal(order),
+  }
+}
+
 function addQuestions(numLemonades) {
   const userNum = Number.parseInt(numLemonades)
   const questions = []
@@ -60,30 +67,22 @@ function addQuestions(numLemonades) {
   return questions
 }
 
-function addLemonadesToOrder(orgOrder, i) {
-  const lemonade = {
+function createLemonade(userResp, i) {
+  return {
     lemonJuice: Number.parseInt(userResp['lemonJuice' + i]),
     water: Number.parseInt(userResp['water' + i]),
     sugar: Number.parseInt(userResp['sugar' + i]),
     iceCubes: Number.parseInt(userResp['iceCubes' + i]),
   }
+}
 
-  const newOrder = {
+function addLemonadeToOrder(orgOrder, lemonade) {
+  return {
     ...orgOrder,
     lemonades: [
       ...orgOrder.lemonades,
-      {
-        // Set price of each lemonade in the order
-        ...lemonade,
-        price: calculateLemonadePrice(lemonade),
-      },
+      { ...lemonade, price: calculateLemonadePrice(lemonade) },
     ],
-  }
-
-  return {
-    // Set the total price of the order
-    ...newOrder,
-    total: calculateOrderTotal(),
   }
 }
 
@@ -101,10 +100,10 @@ function readAllFiles(dirName) {
 }
 
 export {
-  calculateLemonadePrice,
-  calculateOrderTotal,
+  updateOrderTotal,
   addQuestions,
-  addLemonadesToOrder,
+  createLemonade,
+  addLemonadeToOrder,
   writeFileSync,
   readAllFiles,
 }

@@ -60,17 +60,31 @@ function addQuestions(numLemonades) {
   return questions
 }
 
-function createLemonadeObjs(orgOrder, i) {({
+function addLemonadesToOrder(orgOrder, i) {
+  const lemonade = {
+    lemonJuice: Number.parseInt(userResp['lemonJuice' + i]),
+    water: Number.parseInt(userResp['water' + i]),
+    sugar: Number.parseInt(userResp['sugar' + i]),
+    iceCubes: Number.parseInt(userResp['iceCubes' + i]),
+  }
+
+  const newOrder = {
     ...orgOrder,
     lemonades: [
       ...orgOrder.lemonades,
       {
-        lemonJuice: Number.parseInt(userResp['lemonJuice' + i]),
-        water: Number.parseInt(userResp['water' + i]),
-        sugar: Number.parseInt(userResp['sugar' + i]),
-        iceCubes: Number.parseInt(userResp['iceCubes' + i]),
+        // Set price of each lemonade in the order
+        ...lemonade,
+        price: calculateLemonadePrice(lemonade),
       },
-    ]})
+    ],
+  }
+
+  return {
+    // Set the total price of the order
+    ...newOrder,
+    total: calculateOrderTotal(),
+  }
 }
 
 function writeFileSync(fileName, order) {
@@ -90,7 +104,7 @@ export {
   calculateLemonadePrice,
   calculateOrderTotal,
   addQuestions,
-  createLemonadeObjs,
+  addLemonadesToOrder,
   writeFileSync,
   readAllFiles,
 }

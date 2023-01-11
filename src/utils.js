@@ -23,19 +23,12 @@ function calculateLemonadePrice(lemonade) {
   return result
 }
 
-function calculateOrderTotal({ lemonades }) {
+function calculateOrderTotal(lemonades) {
   let result = 0
   for (let lemonade of lemonades) {
     result += lemonade.price
   }
   return result
-}
-
-function updateOrderTotal(order) {
-  return {
-    ...order,
-    total: calculateOrderTotal(order),
-  }
 }
 
 function addQuestions(numLemonades) {
@@ -83,6 +76,13 @@ function addLemonadeToOrder(orgOrder, lemonade) {
       ...orgOrder.lemonades,
       { ...lemonade, price: calculateLemonadePrice(lemonade) },
     ],
+  }
+}
+
+function updateOrderTotal(order) {
+  return {
+    ...order,
+    total: calculateOrderTotal(order.lemonades),
   }
 }
 

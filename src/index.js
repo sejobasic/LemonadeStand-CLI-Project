@@ -46,7 +46,7 @@ vorpal
           }
           writeFileSync(
             order.lemonadeStand.name + '/' + order.customer.name + '.json',
-            order
+            order 
           )
           callback()
         })
